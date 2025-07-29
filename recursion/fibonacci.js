@@ -23,4 +23,3 @@ function fibsRec(n, seq = [0, 1]) {
     return fibsRec(n, seq)
 }
 
-console.log(fibsRec(8))
