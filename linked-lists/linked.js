@@ -5,15 +5,31 @@ export class List {
         this.head = null;
     }
 
+    getList() {
+        return this.head;
+    }
+
     append(value) {
         if (this.head == null) {
             this.head = new Node(value)
             return;
+        } else {
+            let currentNode = this.head;
+            while (currentNode.next !== null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = new Node(value)
+            return;
         }
-
     }
+    
 }
 
+let list = new List()
+list.append("Content")
+list.append("Content1")
+list.append("Content2")
+console.log(list.getList())
 
 
 
