@@ -22,6 +22,12 @@ export class List {
             return;
         }
     }
+
+    prepend(value) {
+        let newNode = new Node(value);
+        newNode.next = this.head;
+        this.head = newNode;
+    }
     
 }
 
@@ -31,6 +37,8 @@ list.append("Content1")
 list.append("Content2")
 console.log(list.getList())
 
+list.prepend("First Da")
+console.log(list)
 
 
 
