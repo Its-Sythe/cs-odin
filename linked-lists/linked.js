@@ -5,6 +5,34 @@ export class List {
         this.head = null;
     }
 
+    contains(value) {
+        let currentNode = this.head;
+        while (currentNode.value != value) {
+            currentNode = currentNode.next;
+            if (currentNode.next == null) {
+                break;
+            }
+        }
+
+        if (currentNode.value == value) {
+            return true;
+        }
+
+        return false;
+    }
+
+    find(value) {
+        if (this.contains(value)) {
+            let currentNode = this.head;
+            let index = 0;
+            while (currentNode.value != value) {
+                currentNode = currentNode.next;
+                index++
+            }
+            return index;
+        }
+    }
+
     getList() {
         return this.head;
     }
@@ -28,24 +56,55 @@ export class List {
         newNode.next = this.head;
         this.head = newNode;
     }
+
+    size() {
+        let currentNode = this.head;
+        let length = 0;
+        while (currentNode.next != null) {
+            currentNode = currentNode.next
+            length++
+        }  
+        return length;
+    }
+
+    head() {
+        return this.head;
+    }
+
+    tail() {
+        let currentNode = this.head;
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
+    }
     
+    at(index) {
+        //Todo
+    }
+
+    pop() {
+        // Todo
+    }
+
+    toString() {
+        let string = []
+        let currentNode = this.head;
+        while(currentNode.next != null) {
+            string.push(currentNode.value)
+            currentNode = currentNode.next;
+        }    
+        string.push(this.tail().value);
+        string.push("null")
+        return string.join(" -> ")
+    }
 }
 
 let list = new List()
 list.append("Content")
 list.append("Content1")
 list.append("Content2")
-console.log(list.getList())
-
-list.prepend("First Da")
-console.log(list)
-
-
-
-
-
-
-
+console.log(list.toString());
 
 
 
