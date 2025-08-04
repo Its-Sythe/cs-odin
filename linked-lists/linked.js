@@ -80,36 +80,46 @@ export class List {
     }
     
     at(index) {
-        //Todo
+        let currentIndex = 0;
+        let currentNode = this.head;
+        while (currentIndex != index) {
+            currentNode = currentNode.next;
+            currentIndex++
+        }
+        return currentNode;
     }
 
     pop() {
-        // Todo
+        let currentNode = this.head;
+        while (currentNode.next.next != null) {
+            currentNode = currentNode.next
+        } 
+        currentNode.next = null;
+        return this.head;
     }
 
     toString() {
         let string = []
         let currentNode = this.head;
         while(currentNode.next != null) {
-            string.push(currentNode.value)
+            string.push(`(${currentNode.value})`)
             currentNode = currentNode.next;
         }    
-        string.push(this.tail().value);
+        string.push(`(${this.tail().value})`);
         string.push("null")
         return string.join(" -> ")
     }
 }
 
-let list = new List()
-list.append("Content")
-list.append("Content1")
-list.append("Content2")
-console.log(list.toString());
+const list = new List();
 
-
-
-
-
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
+console.log(list.toString())
 
 
 
