@@ -20,7 +20,19 @@ class HashMap {
     }
 
     set(key, value) {
+        let list = new List()
+       let index = this.hash(key)
+       if (this.buckets[index] == null) {
+        list.append(key, value)
+        this.buckets[index] = list
+        return;
+       }
+       this.buckets[index].append(key, value)
+       console.log(this.buckets[index])
     }
 }
 
 let map = new HashMap();
+map.set("Hello", "IDK")
+map.set("Sara", "Example")
+map.set("raSa", "Another Example")
