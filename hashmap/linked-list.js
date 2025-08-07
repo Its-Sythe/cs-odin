@@ -73,5 +73,15 @@ export class List {
         }
         return false;
     }
+
+    size() {
+        let currentNode = this.head;
+        let length = 0;
+        while (currentNode.next != null) {
+            currentNode = currentNode.next
+            length++
+        }  
+        return length;
+    }
 }
 
