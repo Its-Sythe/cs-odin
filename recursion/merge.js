@@ -1,32 +1,22 @@
 function merge(l, r) {
     let result = []
-    
-    let  i = 0; j = 0;
-    // Check that both of the arrays are not empty
-    while ( i < l.length && j < r.length) {
-        // Check whether the element at i in the left array is less than 
-        // that of the right array
-        if (l[i] < r[j]) {
-            //if true push the left one to the results array
-            result.push(l[i])
-            //Increment the counter for the base case of the loop by 1
-            i++
-        // Otherwise do the opposite and also increment j by 1
-        } else {
-            result.push(r[j])
-            j++
+
+    for (let i = 0; i < l.length; i++) {
+        for (let j = 0; j < r.length; j++) {
+            if (i < l.length && j < r.length) {
+                if (l[i] < r[j]) {
+                    result.push(l[i])
+                } else {
+                    result.push(r[j])
+                }
+            }
+            if (l[i] < r[j]) {
+                result.push(l[i])
+            } else {
+                result.push(r[j])
+            }
         }
     }
-    
-    // Check for individual items in the arrays
-    for(i; i < l.length; i++) {
-        result.push(l[i])
-    }
-
-    for(j; j < r.length; j++) {
-        result.push(r[j])
-    }
-
     return result;
 }
 
