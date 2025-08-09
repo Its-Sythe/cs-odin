@@ -26,7 +26,24 @@ export class Tree {
     }
 
     insert(value) {
-       
+        if (this.root == null) return;
+
+        let currNode = this.root;
+        let prevNode;
+        while (currNode != null) {
+            if (currNode.value >= value) {
+                prevNode = currNode;
+                currNode = currNode.lChild; 
+            } else if (currNode.value <= value) {
+                prevNode = currNode
+                currNode = currNode.rChild;
+            }
+        }
+        if (prevNode.value >= value) {
+            prevNode.lChild = new Node(value)
+        } else if (prevNode.value <= value) {
+            prevNode.rChild = new Node(value)
+        }
     }
 }
 
@@ -51,7 +68,8 @@ function buildTree(arr) {
     return root;
 }
 
-//let tree = new Tree([1, 2, 3, 0, 6, 9, 8, 4, 5, 7])
-//prettyPrint(tree.root)
-//insert(1)
+let tree = new Tree([1, 2, 3, 0, 6, 9, 8, 4, 5, 7])
+tree.insert(10)
+tree.insert(-1)
 
+prettyPrint(tree.root)
