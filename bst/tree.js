@@ -30,26 +30,26 @@ export class Tree {
         return Array.from(new Set(arr.toSorted((a, b) => a - b)))
     }
 
-    insert(value) {
+    findNode(value) {
         let currNode = this.root;
-        if (currNode == null) {
-            return this.root = new Node(value)
-        }
+        let prevNode = 0;
+        while (currNode != null) {
+            if (currNode.value == value)
+                return { currNode, prevNode }
 
-        let prevNode;
-
-        while(currNode != null) {
             prevNode = currNode;
-
-            if (currNode.value == value) break;
-
             if (currNode.value > value) {
                 currNode = currNode.left;
             } else if (currNode.value < value) {
                 currNode = currNode.right;
             }
-
         }
+        return prevNode;
+    }
+
+    insert(value) {
+        let prevNode = this.findNode(value)
+
         if (prevNode.value > value) {
             prevNode.left = new Node(value)
         } else if (prevNode.value < value) {
@@ -57,50 +57,43 @@ export class Tree {
         }
     }
 
-    delete(value) {
-        let currNode = this.root;
-        if (currNode == null) return;
-
-        let prevNode;
-
-        while (currNode != null) {
-            if (currNode.value == value) break;
-            prevNode = currNode
-            if (currNode.value > value) {
-                currNode = currNode.left;
-            } else if (currNode.value < value) {
-                currNode = currNode.right;
-            }
+    deleteLeaf(node, parent) {
+        if (parent.value > node.value) {
+            parent.left = null
+        } else if (parent.value < node.value) {
+            parent.right = null
         }
-        
-        //Delete a leaf.
-        if (currNode.left == null && currNode.right == null) {
-            if (prevNode.value > value) {
-                prevNode.left = null;
-            } else if (prevNode.value < value) {
-                prevNode.right = null;
-            }
-        }
-
-        //Delete a parent node with one child.
-        if (currNode.left != null) {
-            if (prevNode.value > currNode.left.value) {
-                prevNode.left = this.insert(currNode.left.value)
-            } else if (prevNode.value < currNode.left.value) {
-                prevNode.right = this.insert(currNode.left.value)
-            }
-        } else if (currNode.right != null) {
-            console.log("Reached here")
-            if (prevNode.value > currNode.value) {
-                console.log("Should be here")
-                prevNode.left = currNode.right
-                currNode = null
-                console.log(prevNode)
-            } else if (prevNode.value < currNod.right.value) {
-                prevNode.right = currNode.right
-            }
-        }
-      
     }
+
+    deleteNode(node, parent) {
+        if (node.left != null && node.right == null) {
+           if (parent.value > node.value) {
+                parent.left = node.left;
+            } else if (parent.value < node.value) {
+                parent.right = node.left;
+            }
+        } else if (node.right != null && node.left == null) {
+            if (parent.value > node.value) {
+                parent.right = node.left;
+            } else if (parent.value < node.value) {
+                parent.right = node.right;
+            }
+        } else if (node.right != null && node.left != null) {
+
+        }
+    }
+
+    delete(value) {
+        let { currNode, prevNode } = this.findNode(value)
+        
+        if (prevNode != 0) {
+            if (currNode.left == null && currNode.right == null) {
+                this.deleteLeaf(currNode, prevNode)
+            } else if (currNode.left != null || currNode.right != null) {
+                this.deleteNode(currNode, prevNode)
+            }
+        }
+    }
+
 }
 
