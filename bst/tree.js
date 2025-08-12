@@ -46,6 +46,14 @@ export class Tree {
         }
         return prevNode;
     }
+    //Get inorder successor
+    getSucc(curr) {
+        curr = curr.right;
+        while (curr !== null && curr.left !== null) {
+            curr = curr.left;
+        }
+        return curr;
+    }
 
     insert(value) {
         let prevNode = this.findNode(value)
@@ -79,8 +87,18 @@ export class Tree {
                 parent.right = node.right;
             }
         } else if (node.right != null && node.left != null) {
-
+            let succ = this.getSucc(node)
+            let { currNode, prevNode } = this.findNode(succ.value)
+            node.value = succ.value
+            this.deleteLeaf(currNode, prevNode)
         }
+    }
+
+    deleteRootNode(node) {
+        let succ = this.getSucc(node)
+        let { currNode, prevNode } = this.findNode(succ.value)
+        node.value = succ.value;
+        this.deleteLeaf(currNode, prevNode)
     }
 
     delete(value) {
@@ -92,6 +110,8 @@ export class Tree {
             } else if (currNode.left != null || currNode.right != null) {
                 this.deleteNode(currNode, prevNode)
             }
+        } else if (prevNode == 0) {
+            this.deleteRootNode(currNode)
         }
     }
 
