@@ -115,5 +115,55 @@ export class Tree {
         }
     }
 
+    checkCallback(callback) {
+        if (typeof(callback) != "function") {
+            throw new Error("Please provide a valid function")
+        }
+    }
+
+    levelOrderForEach(callback) { // Couldnt implement recursive, it still hasnt clicked D: 
+        this.checkCallback(callback) 
+        if (this.root == null) return;
+
+        let nodeQueue = []
+        nodeQueue.push(this.root)
+
+        while (nodeQueue.length != 0) {
+            let currNode = nodeQueue[0]
+            callback(currNode)
+            if (currNode.left != null) {
+                nodeQueue.push(currNode.left)
+            }
+            if (currNode.right != null) {
+                nodeQueue.push(currNode.right)
+            }
+            nodeQueue.splice(0, 1);
+        }
+    }
+
+    inOrderForEach(callback) {
+        this.checkCallback(callback)
+        let root = this.root;
+        if (root == null) return;
+
+    }
+
+    preOrderForEach(callback) {
+        this.checkCallback(callback)
+        let root = this.root;
+        if (root == null) return;
+
+        callback(root)
+        root.left = this.preOrderForEach(callback)
+        root.right = this.preOrderForEach(callback)
+        
+        return root;
+    }
+    
+    postOrderForEach(callback) {
+
+    }
 }
 
+let tree = new Tree([1, 2, 3, 4, 5])
+tree.preOrderForEach((node) => console.log(node.value))
