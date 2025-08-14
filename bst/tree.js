@@ -121,6 +121,7 @@ export class Tree {
         }
     }
 
+    // Bless mycodeschool for the explanations on these DFS and BFS implemetation
     levelOrderForEach(callback) { // Couldnt implement recursive, it still hasnt clicked D: 
         this.checkCallback(callback) 
         if (this.root == null) return;
@@ -167,5 +168,24 @@ export class Tree {
         callback(root);
         this.inOrderForEach(root.right, callback)
     }
-}
 
+    depth(value) {
+        let currNode = this.root; 
+        let depth = 0;
+        while (currNode != null) {
+            if (currNode.value == value) break;
+            
+            depth++
+            if (currNode.value > value) {
+                currNode = currNode.left;
+            } else if (currNode.value < value) {
+                currNode = currNode.right;
+            }
+        }
+        if (currNode == null) {
+            return false;
+        } else {
+            return depth;
+        }
+    }
+}
