@@ -169,6 +169,24 @@ export class Tree {
         this.inOrderForEach(root.right, callback)
     }
 
+    height(value) {
+        let currNode = this.root;
+        let tgtNode;
+
+        while (currNode != null) {
+            if (currNode.value == value) {
+                tgtNode = currNode;
+                break;
+            }
+
+            if (currNode.value > value) {
+                currNode = currNode.left;
+            } else if (currNode.value < value) {
+                currNode = currNode.right;
+            }
+        }
+    }
+
     depth(value) {
         let currNode = this.root; 
         let depth = 0;
