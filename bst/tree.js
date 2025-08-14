@@ -141,29 +141,31 @@ export class Tree {
         }
     }
 
-    inOrderForEach(callback) {
-        this.checkCallback(callback)
-        let root = this.root;
-        if (root == null) return;
-
-    }
-
-    preOrderForEach(callback) {
-        this.checkCallback(callback)
-        let root = this.root;
-        if (root == null) return;
-
+    preOrderForEach(root, callback) {
+        this.checkCallback(callback);
+        if (root == null) return; 
+    
         callback(root)
-        root.left = this.preOrderForEach(callback)
-        root.right = this.preOrderForEach(callback)
-        
-        return root;
+        this.preOrderForEach(root.left, callback)
+        this.preOrderForEach(root.right, callback)
     }
     
-    postOrderForEach(callback) {
+    postOrderForEach(root, callback) {
+        this.checkCallback(callback);
+        if (root == null) return;
 
+        this.postOrderForEach(root.left, callback);
+        this.postOrderForEach(root.right, callback);
+        return callback(root)
+    }
+
+    inOrderForEach(root, callback) {
+        this.checkCallback(callback);
+        if (root == null) return;
+
+        this.inOrderForEach(root.left, callback);
+        callback(root);
+        this.inOrderForEach(root.right, callback)
     }
 }
 
-let tree = new Tree([1, 2, 3, 4, 5])
-tree.preOrderForEach((node) => console.log(node.value))
