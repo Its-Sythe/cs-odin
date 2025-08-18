@@ -168,24 +168,20 @@ export class Tree {
         callback(root);
         this.inOrderForEach(root.right, callback)
     }
+    
+    getHeight(node) {
+        if (node == null) return -1;
+
+        let rightH = this.getHeight(node.right)
+        let leftH = this.getHeight(node.left)
+
+        return Math.max(rightH, leftH) + 1
+   }
 
     height(value) {
-        let currNode = this.root;
-        let tgtNode;
-
-        while (currNode != null) {
-            if (currNode.value == value) {
-                tgtNode = currNode;
-                break;
-            }
-
-            if (currNode.value > value) {
-                currNode = currNode.left;
-            } else if (currNode.value < value) {
-                currNode = currNode.right;
-            }
-        }
-    }
+        let node = this.findNode(value).currNode
+        console.log(`Height: ${this.getHeight(node)}`)
+   }
 
     depth(value) {
         let currNode = this.root; 
