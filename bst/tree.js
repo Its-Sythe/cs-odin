@@ -205,8 +205,10 @@ export class Tree {
 
     isBalanced() {
         let tree = this.root;
-        let treeLH = this.getHeight(tree.left);
-        let treeRH = this.getHeight(tree.right)
-        console.log(treeLH - treeRH);
+        let heightDiff = (this.getHeight(tree.left) - this.getHeight(tree.right)) 
+
+        if (heightDiff == 1) return true;
+
+        return false;
     }
 }

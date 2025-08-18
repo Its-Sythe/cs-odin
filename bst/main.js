@@ -15,6 +15,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree.buildTree(tree.arr)
 tree.insert(2)
-tree.height(8)
-tree.isBalanced()
+console.log(tree.isBalanced())
 prettyPrint(tree.root)
