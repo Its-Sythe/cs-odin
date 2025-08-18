@@ -202,4 +202,11 @@ export class Tree {
             return depth;
         }
     }
+
+    isBalanced() {
+        let tree = this.root;
+        let treeLH = this.getHeight(tree.left);
+        let treeRH = this.getHeight(tree.right)
+        console.log(treeLH - treeRH);
+    }
 }
