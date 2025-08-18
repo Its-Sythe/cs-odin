@@ -211,4 +211,11 @@ export class Tree {
 
         return false;
     }
+
+    rebalance() {
+        let newArr = [];
+
+        this.inOrderForEach(this.root, (node) => newArr.push(node.value)) 
+        return this.sortArr(newArr)
+    }
 }
