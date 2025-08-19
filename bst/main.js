@@ -12,8 +12,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+let tree = new Tree([7, 4, 67, 3, 5, 23, 324, 1, 8, 6345, 9])
 tree.buildTree(tree.arr)
-tree.insert(2)
-tree.rebalance()
+console.log(tree.isBalanced(tree.root));
 prettyPrint(tree.root)

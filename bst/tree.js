@@ -168,7 +168,7 @@ export class Tree {
         callback(root);
         this.inOrderForEach(root.right, callback)
     }
-    
+
     getHeight(node) {
         if (node == null) return -1;
 
@@ -176,7 +176,7 @@ export class Tree {
         let leftH = this.getHeight(node.left)
 
         return Math.max(rightH, leftH) + 1
-   }
+    }
 
     height(value) {
         let node = this.findNode(value).currNode
@@ -188,7 +188,7 @@ export class Tree {
         let depth = 0;
         while (currNode != null) {
             if (currNode.value == value) break;
-            
+
             depth++
             if (currNode.value > value) {
                 currNode = currNode.left;
@@ -203,13 +203,31 @@ export class Tree {
         }
     }
 
-    isBalanced() {
-        let tree = this.root;
-        let heightDiff = (this.getHeight(tree.left) - this.getHeight(tree.right)) 
+    isBalanced(tree) {
+        if (tree == null) return -1;
+        let rHeight = 0;
+        let lHeight = 0;
 
-        if (heightDiff == 1) return true;
+        let stack = [];
+        stack.push(tree)
 
-        return false;
+        while (stack.length != 0) {
+            if (tree.left != null) {
+                console.log("I was reached")
+                stack.push(tree.left)
+            } else if (tree.right != null) {
+                stack.push(tree.right)
+            }
+
+            if (tree.left == null) {
+                stack.pop();
+                lHeight++
+            } else if (tree.right == null) {
+                stack.pop();
+                rHeight++;
+            }
+        }
+        console.log(rHeight, lHeight)
     }
 
     rebalance() {
