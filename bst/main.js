@@ -17,4 +17,5 @@ tree.buildTree(tree.arr)
 tree.insert(2)
 tree.insert(24)
 console.log(tree.isBalanced(tree.root));
-prettyPrint(tree.root)
+prettyPrint(tree.rebalance());
+console.log(tree.isBalanced(tree.root))
