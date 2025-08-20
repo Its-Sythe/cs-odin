@@ -203,19 +203,17 @@ export class Tree {
         }
     }
 
-    isBalancedRec(root) {
-        if (root == null) return 0;
-
-        let lHeight = this.isBalancedRec(root.left)
-        let rHeight = this.isBalancedRec(root.right)
-
-        if (lHeight == -1 || rHeight == -1 || Math.abs(lHeight - rHeight) > 1) return -1;
-
-        return Math.max(lHeight, rHeight) + 1;
-    }
-
     isBalanced(root) {
-        return this.isBalancedRec(root) > 0;
+        if (root == null) return -1;
+    
+        let rightH = this.getHeight(root.right)
+        let leftH = this.getHeight(root.left)
+
+        let result = Math.max(this.isBalanced(root.left) && this.isBalanced(root.right))
+
+        if (result > 0) return true;
+
+        return false;
     }
 
     rebalance() {
