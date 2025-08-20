@@ -203,31 +203,19 @@ export class Tree {
         }
     }
 
-    isBalanced(tree) {
-        if (tree == null) return -1;
-        let rHeight = 0;
-        let lHeight = 0;
+    isBalancedRec(root) {
+        if (root == null) return 0;
 
-        let stack = [];
-        stack.push(tree)
+        let lHeight = this.isBalancedRec(root.left)
+        let rHeight = this.isBalancedRec(root.right)
 
-        while (stack.length != 0) {
-            if (tree.left != null) {
-                console.log("I was reached")
-                stack.push(tree.left)
-            } else if (tree.right != null) {
-                stack.push(tree.right)
-            }
+        if (lHeight == -1 || rHeight == -1 || Math.abs(lHeight - rHeight) > 1) return -1;
 
-            if (tree.left == null) {
-                stack.pop();
-                lHeight++
-            } else if (tree.right == null) {
-                stack.pop();
-                rHeight++;
-            }
-        }
-        console.log(rHeight, lHeight)
+        return Math.max(lHeight, rHeight) + 1;
+    }
+
+    isBalanced(root) {
+        return this.isBalancedRec(root) > 0;
     }
 
     rebalance() {
