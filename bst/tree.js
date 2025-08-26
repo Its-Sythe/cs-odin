@@ -204,16 +204,19 @@ export class Tree {
     }
 
     isBalanced(root) {
-        if (root == null) return -1;
-    
-        let rightH = this.getHeight(root.right)
-        let leftH = this.getHeight(root.left)
+        if (root == null) return true;
 
-        let result = Math.max(this.isBalanced(root.left) && this.isBalanced(root.right))
+        let lH = this.getHeight(root.left)
+        let rH = this.getHeight(root.right)
 
-        if (result > 0) return true;
+        if (Math.abs(lH - rH) > 1) return false;
 
-        return false;
+        let left = this.isBalanced(root.left)
+        let right = this.isBalanced(root.rigt)
+
+        if (!left || !right) return false;
+
+        return true;
     }
 
     rebalance() {
