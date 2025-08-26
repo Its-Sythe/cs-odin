@@ -22,13 +22,3 @@ function createRandArr(max) {
     }
     return newArr;
 }
-
-let tree = new Tree(createRandArr(100));
-tree.insert(102)
-tree.insert(105)
-tree.insert(108)
-tree.insert(122)
-prettyPrint(tree.root)
-console.log(tree.isBalanced(tree.root))
-tree.rebalance()
-console.log(tree.isBalanced(tree.root))
