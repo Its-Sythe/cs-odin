@@ -12,9 +12,23 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-let tree = new Tree([7, 4, 67, 3, 5, 23, 324, 1, 8, 6345, 9])
-tree.buildTree(tree.arr)
+function createRandArr(max) {
+    let newArr = []
+    for (let i = 1; i < max; i++) {
+      let randNo = Math.floor(Math.random(max) * max)
+      if (newArr.includes(randNo)) randNo = Math.floor(Math.random(max) * max)
+
+      newArr.push(randNo)
+    }
+    return newArr;
+}
+
+let tree = new Tree(createRandArr(100));
+tree.insert(102)
+tree.insert(105)
+tree.insert(108)
+tree.insert(122)
 prettyPrint(tree.root)
-console.log(tree.isBalanced(tree.root));
-
-
+console.log(tree.isBalanced(tree.root))
+tree.rebalance()
+console.log(tree.isBalanced(tree.root))

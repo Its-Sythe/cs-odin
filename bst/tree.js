@@ -223,7 +223,8 @@ export class Tree {
         let newArr = [];
 
         this.inOrderForEach(this.root, (node) => newArr.push(node.value)) 
-        this.buildTree(this.sortArr(newArr));
+        console.log(newArr)
+        this.root = this.buildTree(this.sortArr(newArr));
         return this.root;
     }
 }
