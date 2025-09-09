@@ -1,4 +1,4 @@
-# T.O.P DSA and CS concepts [Lessons][https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript#a-bit-of-computer-science]
+# T.O.P DSA and CS concepts [Lessons](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript#a-bit-of-computer-science)
 
 ### This was quite mind numbin'
 
